@@ -4,9 +4,10 @@ set(FTD_INTERNAL_INCLUDE_DIR "${FTD_INCLUDE_DIR}/ftd")
 configure_file(Config.h.in ${PROJECT_SOURCE_DIR}/include/ftd/Config.h)
 
 add_library(ftd INTERFACE 
-    ${FTD_INTERNAL_INCLUDE_DIR}/Charset.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/Charset.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/Noncopyable.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/String.h
     ${FTD_INTERNAL_INCLUDE_DIR}/Config.h
-    ${FTD_INTERNAL_INCLUDE_DIR}/String.h
 )
 
 add_library(ftd::ftd ALIAS ftd)

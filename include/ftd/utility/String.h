@@ -1,5 +1,5 @@
-#ifndef FTD_STRING_H
-#define FTD_STRING_H
+#ifndef FTD_UTILITY_STRING_H
+#define FTD_UTILITY_STRING_H
 
 #include "Charset.h"
 
@@ -54,4 +54,4 @@ std::basic_string_view<Char, CharT> trim(std::basic_string_view<Char, CharT> str
 
 } // namespace ftd
 
-#endif // FTD_STRING_H
+#endif // FTD_UTILITY_STRING_H

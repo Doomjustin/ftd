@@ -1,5 +1,5 @@
-#ifndef FTD_CHARSET_H
-#define FTD_CHARSET_H
+#ifndef FTD_UTILITY_CHARSET_H
+#define FTD_UTILITY_CHARSET_H
 
 namespace ftd {
 
@@ -13,4 +13,4 @@ struct Charset {
 
 } // namespace ftd
 
-#endif // FTD_CHARSET_H
+#endif // FTD_UTILITY_CHARSET_H
