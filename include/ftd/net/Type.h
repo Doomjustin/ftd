@@ -6,6 +6,20 @@
 
 namespace ftd {
 
+enum class Domain {
+    IPv4,
+    IPv6
+};
+
+enum class Type {
+    TCP,
+    UDP,
+};
+
+enum class Protocol {
+    Undefined
+};
+
 struct IPv4 {};
 struct IPv6 {};
 
@@ -19,6 +33,34 @@ concept is_domain = std::is_same_v<Domain, IPv4> ||
 template<typename Type>
 concept is_type = std::is_same_v<Type, TCP> ||
                   std::is_same_v<Type, UDP>;
+
+
+
+template<typename T>
+struct DomainTraits;
+
+template<>
+struct DomainTraits<IPv4> {
+    static constexpr Domain value = Domain::IPv4;
+};
+
+template<>
+struct DomainTraits<IPv6> {
+    static constexpr Domain value = Domain::IPv6;
+};
+
+template<typename T>
+struct TypeTraits;
+
+template<>
+struct TypeTraits<TCP> {
+    static constexpr Type value = Type::TCP;
+};
+
+template<>
+struct TypeTraits<UDP> {
+    static constexpr Type value = Type::UDP;
+};
 
 
 using Port = std::uint16_t;

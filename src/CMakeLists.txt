@@ -7,10 +7,25 @@ set(FTD_CONTAINER_SRC
     ${FTD_INTERNAL_INCLUDE_DIR}/container/Heap.h
 )
 
+set(FTD_NET_POSIX_SRC
+    net/posix/Cast.cpp
+    net/posix/Cast.h
+    net/posix/Error.cpp
+    net/posix/Error.h
+    net/posix/PosixSocket.cpp
+    net/posix/PosixSocket.h
+)
+
+set(FTD_NET_WINDOWS_SRC)
+
 set(FTD_NET_SRC
     ${FTD_INTERNAL_INCLUDE_DIR}/net/Endpoint.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/net/Socket.h
     ${FTD_INTERNAL_INCLUDE_DIR}/net/Type.h
     net/Endpoint.cpp
+    net/Socket.cpp
+    $<$<PLATFORM_ID:Linux>:${FTD_NET_POSIX_SRC}>
+    $<$<PLATFORM_ID:Windows>:${FTD_NET_WINDOWS_SRC}>
 )
 
 set(FTD_UTILITY_SRC
@@ -33,19 +48,22 @@ set(FTD_UTILITY_SRC
 
 add_library(ftd STATIC 
     ${FTD_CONTAINER_SRC}    
-    ${FTD_NET_SRC}
     ${FTD_UTILITY_SRC}
+    ${FTD_NET_SRC}
     ${FTD_INTERNAL_INCLUDE_DIR}/Config.h
 )
 
 add_library(ftd::ftd ALIAS ftd)
 
 target_include_directories(ftd INTERFACE
-    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/>
+    $<BUILD_INTERFACE:${FTD_INCLUDE_DIR}>
     $<INSTALL_INTERFACE:include/> # 允许使用相对路径，这里是相对于安装路径的相对路径
 )
 
-target_include_directories(ftd PRIVATE ${FTD_INTERNAL_INCLUDE_DIR})
+target_include_directories(ftd PRIVATE 
+    ${FTD_INCLUDE_DIR}
+    ${FTD_INTERNAL_INCLUDE_DIR} 
+)
 
 set_target_properties(ftd PROPERTIES
     CXX_STANDARD 20
@@ -59,12 +77,12 @@ set_target_properties(ftd PROPERTIES
 
 target_link_libraries(ftd PRIVATE spdlog::spdlog)
 
-target_link_libraries(ftd INTERFACE
+target_link_libraries(ftd PUBLIC
     cpp-compiler-flags
     fmt::fmt
     nlohmann_json::nlohmann_json
 )
 
-target_compile_definitions(ftd INTERFACE
+target_compile_definitions(ftd PUBLIC
    $<$<CONFIG:Debug>:FTD_DEBUG> # 当有类似于DEBUG宏的东西时，很有用
 )

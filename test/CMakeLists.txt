@@ -26,3 +26,5 @@ add_catch2_test(test-endpoint test_endpoint.cpp)
 add_ftd_test(test-log test_log.cpp)
 add_ftd_test(test-threadpool test_threadpool.cpp)
 add_ftd_test(test-timer test_timer.cpp)
+
+add_ftd_test(test-socket test_socket.cpp)
