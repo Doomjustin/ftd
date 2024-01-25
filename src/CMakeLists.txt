@@ -3,8 +3,17 @@ set(FTD_INTERNAL_INCLUDE_DIR "${FTD_INCLUDE_DIR}/ftd")
 
 configure_file(Config.h.in ${PROJECT_SOURCE_DIR}/include/ftd/Config.h)
 
-add_library(ftd STATIC 
+set(FTD_CONTAINER_SRC
     ${FTD_INTERNAL_INCLUDE_DIR}/container/Heap.h
+)
+
+set(FTD_NET_SRC
+    ${FTD_INTERNAL_INCLUDE_DIR}/net/Endpoint.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/net/Type.h
+    net/Endpoint.cpp
+)
+
+set(FTD_UTILITY_SRC
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Charset.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/EnumOperator.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/FunctionWrapper.h
@@ -20,6 +29,13 @@ add_library(ftd STATIC
     utility/Log.cpp
     utility/Log.cpp
     utility/ThreadPool.cpp
+)
+
+add_library(ftd STATIC 
+    ${FTD_CONTAINER_SRC}    
+    ${FTD_NET_SRC}
+    ${FTD_UTILITY_SRC}
+    ${FTD_INTERNAL_INCLUDE_DIR}/Config.h
 )
 
 add_library(ftd::ftd ALIAS ftd)
