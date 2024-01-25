@@ -20,3 +20,6 @@ function(add_ftd_test TARGET SOURCE)
 
     target_link_libraries(${TARGET} PRIVATE ftd::ftd)
 endfunction()
+
+
+add_ftd_test(test-threadpool test_threadpool.cpp)

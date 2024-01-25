@@ -3,12 +3,17 @@ set(FTD_INTERNAL_INCLUDE_DIR "${FTD_INCLUDE_DIR}/ftd")
 
 configure_file(Config.h.in ${PROJECT_SOURCE_DIR}/include/ftd/Config.h)
 
-add_library(ftd INTERFACE 
+add_library(ftd STATIC 
+    ${FTD_INTERNAL_INCLUDE_DIR}/container/Heap.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Charset.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/EnumOperator.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/FunctionWrapper.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Noncopyable.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Singleton.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/String.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/ThreadPool.h
     ${FTD_INTERNAL_INCLUDE_DIR}/Config.h
+    utility/ThreadPool.cpp
 )
 
 add_library(ftd::ftd ALIAS ftd)
@@ -18,7 +23,7 @@ target_include_directories(ftd INTERFACE
     $<INSTALL_INTERFACE:include/> # 允许使用相对路径，这里是相对于安装路径的相对路径
 )
 
-# target_include_directories(ftd INTERFACE ${FTD_INTERNAL_INCLUDE_DIR})
+target_include_directories(ftd PRIVATE ${FTD_INTERNAL_INCLUDE_DIR})
 
 set_target_properties(ftd PROPERTIES
     CXX_STANDARD 20
@@ -30,10 +35,11 @@ set_target_properties(ftd PROPERTIES
     INTERPROCEDURAL_OPTIMIZATION_MINSIZEREL TRUE
 )
 
+target_link_libraries(ftd PRIVATE spdlog::spdlog)
+
 target_link_libraries(ftd INTERFACE
     cpp-compiler-flags
     fmt::fmt
-    spdlog::spdlog
     nlohmann_json::nlohmann_json
 )
 
