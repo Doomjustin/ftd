@@ -8,11 +8,17 @@ add_library(ftd STATIC
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Charset.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/EnumOperator.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/FunctionWrapper.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/Log.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Noncopyable.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/Singleton.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/String.h
     ${FTD_INTERNAL_INCLUDE_DIR}/utility/ThreadPool.h
+    ${FTD_INTERNAL_INCLUDE_DIR}/utility/Timer.h
     ${FTD_INTERNAL_INCLUDE_DIR}/Config.h
+    utility/logger/SpdLogger.h
+    utility/logger/SpdLogger.cpp
+    utility/Log.cpp
+    utility/Log.cpp
     utility/ThreadPool.cpp
 )
 

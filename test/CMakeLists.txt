@@ -21,5 +21,6 @@ function(add_ftd_test TARGET SOURCE)
     target_link_libraries(${TARGET} PRIVATE ftd::ftd)
 endfunction()
 
-
+add_ftd_test(test-log test_log.cpp)
 add_ftd_test(test-threadpool test_threadpool.cpp)
+add_ftd_test(test-timer test_timer.cpp)
