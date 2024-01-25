@@ -42,7 +42,6 @@ set(FTD_UTILITY_SRC
     utility/logger/SpdLogger.h
     utility/logger/SpdLogger.cpp
     utility/Log.cpp
-    utility/Log.cpp
     utility/ThreadPool.cpp
 )
 

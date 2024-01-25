@@ -48,7 +48,7 @@ protected:
 std::unique_ptr<ISocket> make_socket(Domain domain, Type type, Protocol protocol);
 std::unique_ptr<ISocket> make_socket(int id, Domain domain, Type type, Protocol protocol);
 
-template<typename DomainType, typename TypeType, typename ProtocolType>
+template<typename DomainType, typename TypeType>
 std::unique_ptr<ISocket> make_socket()
 {
     return make_socket(DomainTraits<DomainType>::value, 
@@ -56,7 +56,7 @@ std::unique_ptr<ISocket> make_socket()
                        Protocol::Undefined);
 }
 
-template<typename DomainType, typename TypeType, typename ProtocolType>
+template<typename DomainType, typename TypeType>
 std::unique_ptr<ISocket> make_socket(int id)
 {
     return make_socket(id,
