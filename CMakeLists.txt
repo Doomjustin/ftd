@@ -19,7 +19,7 @@ include(Submodule)
 include(CppStandard)
 
 # 更新所有的第三方库: git submodule update
-update_submodule()
+# update_submodule()
 
 add_subdirectory(third-party/fmt)
 add_subdirectory(third-party/spdlog)
