@@ -24,7 +24,12 @@ endfunction()
 add_catch2_test(test-endpoint test_endpoint.cpp)
 
 add_ftd_test(test-log test_log.cpp)
+add_test(NAME test-log COMMAND test-log)
+
 add_ftd_test(test-threadpool test_threadpool.cpp)
+add_test(NAME test-threadpool COMMAND test-threadpool)
+
 add_ftd_test(test-timer test_timer.cpp)
 
 add_ftd_test(test-socket test_socket.cpp)
+add_test(NAME test-socket COMMAND test-socket)
